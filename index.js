@@ -141,9 +141,9 @@ class Instructor extends Lambdasian {
   constructor(student) {
     super({
       ...student,
-      specialty: 'redux',
-      favLanguage: 'JavaScript, Python, Elm etc.',
-      catchPhrase: `Don't forget the homies`,
+      // specialty: 'redux',
+      // favLanguage: 'JavaScript, Python, Elm etc.',
+      // catchPhrase: `Don't forget the homies`,
     })
     this.specialty = student.specialty
     this.favLanguage = student.favLanguage
@@ -155,6 +155,9 @@ class Instructor extends Lambdasian {
 
   grade(student, subject) {
     return `${this.name} receives a perfect score on ${subject}`
+  }
+  randomGrade(student) {
+    return Math.floor(Math.random() + student.grade)
   }
 }
 
@@ -181,10 +184,10 @@ class Student extends Lambdasian {
   constructor(student) {
     super({
       ...student,
-      previousBackground: 'Insurance',
-      className: 'WebPT14',
-      favSubjects: ['HTML', 'CSS', 'JS'],
-      grade: 1 - 100,
+      // previousBackground: 'Insurance',
+      // className: 'WebPT14',
+      // favSubjects: ['HTML', 'CSS', 'JS'],
+      // grade: 1 - 100,
     })
     this.previousBackground = student.previousBackground
     this.className = student.className
@@ -200,6 +203,13 @@ class Student extends Lambdasian {
   }
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`
+  }
+  graduate(student) {
+    if (student.grade >= 70) {
+      return 'Graduate'
+    } else {
+      return student.randomGrade()
+    }
   }
 }
 
@@ -218,15 +228,18 @@ class Student extends Lambdasian {
 */
 class ProjectManager extends Instructor {
   constructor(student) {
-    super({ ...student, gradClassName: 'CS1', favInstructor: 'Sean' })
+    super({ ...student })
     this.gradClassName = student.gradClassName
     this.favInstructor = student.favInstructor
   }
   standUp(channel) {
-    return `${this.name} announces to ${channel}, @channel standy times!`
+    return `${this.name} announces to ${channel}, @${channel} standy times!`
   }
-  debugsCode(subject) {
-    return `${this.name} debugs ${this.name}'s code on ${subject}`
+  debugsCode(student, subject) {
+    return `${student.name} debugs ${this.name}'s code on ${subject}`
+  }
+  grade(student, subject) {
+    return `${student.name} receives a perfect score on ${subject}`
   }
 }
 
